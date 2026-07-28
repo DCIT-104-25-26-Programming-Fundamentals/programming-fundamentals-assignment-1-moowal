@@ -59,4 +59,77 @@
 # =============================================================================
 # YOUR CODE BELOW — remove the # symbols from the scaffold and fill it in
 # =============================================================================
+def print_matrix(matrix):
+    for row in matrix:
+        for value in row:
+            print(f"{value:5}", end="")
+        print()
 
+def transpose_matrix(matrix):
+    rows = len(matrix)
+    cols = len(matrix[0])
+    result = []
+    for j in range(cols):
+        new_row = []
+        for i in range(rows):
+            new_row.append(matrix[i][j])
+        result.append(new_row)
+    return result
+
+def add_matrices(A, B):
+    rows = len(A)
+    cols = len(A[0])
+    result = []
+    for i in range(rows):
+        new_row = []
+        for j in range(cols):
+            new_row.append(A[i][j] + B[i][j])
+        result.append(new_row)
+    return result
+
+def multiply_matrices(A, B):
+    rows_A = len(A)
+    cols_A = len(A[0])
+    cols_B = len(B[0])
+    result = []
+    for i in range(rows_A):
+        new_row = []
+        for j in range(cols_B):
+            total = 0
+            for k in range(cols_A):
+                total += A[i][k] * B[k][j]
+            new_row.append(total)
+        result.append(new_row)
+    return result
+
+def read_matrix(rows, cols):
+    matrix = []
+    for i in range(rows):
+        row = list(map(int, input(f"Enter row {i+1}: ").split()))
+        matrix.append(row)
+    return matrix
+
+if __name__ == "__main__":
+    rows = int(input("Enter number of rows: "))
+    cols = int(input("Enter number of columns: "))
+
+    print("Enter first matrix:")
+    A = read_matrix(rows, cols)
+
+    print("Original Matrix:")
+    print_matrix(A)
+
+    print("Transposed Matrix:")
+    T = transpose_matrix(A)
+    print_matrix(T)
+
+    print("Enter second matrix (same size):")
+    B = read_matrix(rows, cols)
+
+    print("Sum of matrices:")
+    S = add_matrices(A, B)
+    print_matrix(S)
+
+    print("Matrix Multiplication (A x B):")
+    M = multiply_matrices(A, B)
+    print_matrix(M)
